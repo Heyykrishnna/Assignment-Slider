@@ -142,7 +142,7 @@ const StyledWrapper = styled.div`
 `;
 
 const PortfolioProfile = () => {
-  const [activeTab, setActiveTab] = useState('about');
+  const [activeTab, setActiveTab] = useState<TabKey>('about');
   const [images, setImages] = useState([
     'https://i.pinimg.com/736x/20/8a/f5/208af563619a1929732961a53ff93835.jpg',
     'https://i.pinimg.com/736x/d5/4a/a2/d54aa2ad624ed5e0dd5f04c08340a4a7.jpg',
