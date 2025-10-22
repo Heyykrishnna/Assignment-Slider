@@ -1,5 +1,5 @@
-import React, { useState, useRef } from 'react';
-import { X, Plus, ChevronLeft, ArrowRight } from 'lucide-react';
+import { useState, useRef } from 'react';
+import { X, Plus, ChevronLeft } from 'lucide-react';
 import styled from 'styled-components';
 
 const StyledWrapper = styled.div`
@@ -150,25 +150,25 @@ const PortfolioProfile = () => {
     'https://i.pinimg.com/736x/91/75/d6/9175d6126c31d6f25c4201610f9eef97.jpg'
   ]);
 
-  const fileInputRef = useRef(null);
+  const fileInputRef = useRef<HTMLInputElement | null>(null);
 
   const addImage = () => {
     fileInputRef.current?.click();
   };
 
-  const handleFileChange = (e) => {
-    const file = e.target.files[0];
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const file = e.target.files && e.target.files[0];
     if (file) {
       const newImageUrl = URL.createObjectURL(file);
       setImages([...images, newImageUrl]);
     }
   };
 
-  const deleteImage = (index) => {
+  const deleteImage = (index: number) => {
     setImages(images.filter((_, i) => i !== index));
   };
 
-  const scrollGallery = (direction) => {
+  const scrollGallery = (direction: 'left' | 'right') => {
     const container = document.getElementById('gallery-container');
     if (container) {
       const scrollAmount = direction === 'left' ? -350 : 350;
@@ -176,11 +176,12 @@ const PortfolioProfile = () => {
     }
   };
 
-  const handleRadioChange = (tab) => {
+  const handleRadioChange = (tab: 'about' | 'experiences' | 'Recommended') => {
     setActiveTab(tab);
   };
 
-  const tabContent = {
+  type TabKey = 'about' | 'experiences' | 'Recommended';
+  const tabContent: Record<TabKey, { title: string; content: string }> = {
     about: {
       title: "Hello! I'm Dave, your sales rep here from Salesforce.",
       content: `Senior Sales Representative at Salesforce (2022 - Present)
@@ -349,8 +350,8 @@ Managed a diverse portfolio of 50+ clients, achieving a 95% retention rate. Deli
                       src={img}
                       alt={`Gallery ${index + 1}`}
                       className="relative w-full h-full object-cover rounded-2xl shadow-2xl border-2 border-gray-700 group-hover:border-transparent transition-all duration-300 group-hover:scale-[1.02] transform"
-                      onError={(e) => {
-                        e.target.src = 'https://via.placeholder.com/400x300/1e293b/64748b?text=Image';
+                      onError={(e: React.SyntheticEvent<HTMLImageElement>) => {
+                        e.currentTarget.src = 'https://via.placeholder.com/400x300/1e293b/64748b?text=Image';
                       }}
                     />
                     
