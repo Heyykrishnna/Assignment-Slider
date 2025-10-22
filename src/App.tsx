@@ -58,7 +58,7 @@ const StyledWrapper = styled.div`
     text-decoration: none;
     -webkit-user-select: none;
     user-select: none;
-    transition: color 0.25s ease;
+    transition: color 0.25s ease, opacity 0.25s ease;
     outline-offset: -6px;
     display: flex;
     align-items: center;
@@ -66,6 +66,7 @@ const StyledWrapper = styled.div`
     position: relative;
     z-index: 3;
     -webkit-tap-highlight-color: transparent;
+    opacity: 0.5; /* reduced opacity for unselected */
   }
 
   .label span {
@@ -77,6 +78,11 @@ const StyledWrapper = styled.div`
 
   .wrap input[class*="rd-"]:checked + label {
     color: var(--color-pure);
+    opacity: 1; /* full opacity when selected */
+  }
+
+  .label:hover {
+    opacity: 1; /* full opacity on hover */
   }
 
   .bar {
